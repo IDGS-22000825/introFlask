@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 
 app = Flask(__name__)
 
@@ -53,7 +53,17 @@ def operas():
     </form>
     '''
 
+@app.route('/operaBas')
+def operas1():
+    return render_template('operaBas.html')
 
+@app.route("/resultado", methods=["GET", "POST"])
+def resultado():
+    n1=request.form.get("n1")
+    n2=request.form.get("n2")
+    
+
+    return f"La suma es: {float(n1)+float(n2)}"
 
 
 
