@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% import "_macros.html" as macros %}
+
+<form action="/operaBas" method="post">
+
+    {{macros.datos("n1", "Ingrese el primer numero", "number")}}
+    {{macros.datos("nombre","Ingree elnombre")}}
+    {{macros.datos("contraseña", "Ingrese la contraseña", "password")}}
+
+    <button type="submit" class="btn btn-primary">Calcular</button>
+
+</form>
+
+{% endblock %}

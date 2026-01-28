@@ -1,0 +1,58 @@
+{% block container %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEPOLIS - NICE</title>
+    <link rel="stylesheet" href="../static/css/cinepolis.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>CINÉPOLIS - NICE</h1>
+
+        {% if mensaje %}
+        <p class="mensaje-error">{{ mensaje }}</p>
+        {% endif %}
+
+        <form action="cinepolis" method="POST">
+
+            <h3>Entradas</h3>
+
+            <label>Nombre</label>
+            <input type="text" name="nombre" value="{{ nombre|default('') }}" required>
+
+            <label>Cantidad Compradores</label>
+            <input type="number" name="cantidad_compradores" value="{{ cantidad_compradores|default(0) }}" min="1" required>
+
+            <label>Tarjeta Cineco</label>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="tarjeta" value="si" {% if tarjeta=='si' %}checked{% endif %}> Sí
+                </label>
+                <label>
+                    <input type="radio" name="tarjeta" value="no" {% if tarjeta=='no' %}checked{% endif %}> No
+                </label>
+            </div>
+
+            <label>Cantidad de Boletos</label>
+            <input type="number" name="cantidad_boletos" value="{{ cantidad_boletos|default(0) }}" min="1" required>
+
+            <h3>Salidas</h3>
+
+            <label>Total a pagar</label>
+            <input type="text" name="valor_pagar" value="{{ total|default('') }}" readonly>
+
+            <div class="button-group">
+                <button type="submit">Procesar</button>
+                <button type="button" onclick="window.location.href='/'">Salir</button>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}

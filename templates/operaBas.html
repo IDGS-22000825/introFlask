@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form action="/resultado" method="post">
+<form action="/operaBas" method="post">
 
     <div class="mb-3">
 
@@ -16,21 +16,35 @@
         <input type="text" class="form-control" id="n2" name="n2">
 
     </div>
-    <label>Selecciona la operacion: </label>
-    
-    <label for="suma" class="form-label">Suma</label>
-    <input type="radio" name="operacion" id="suma" value="suma">
-    <label for="resta" class="form-label">Resta</label>
-    <input type="radio" name="operacion" id="resta" value="resta">
-    <label for="multiplicacion" class="form-label">Multiplicacion</label>
-    <input type="radio" name="operacion" id="multiplicacion" value="multiplicacion">
-    <label for="division" class="form-label">Division</label>
-    <input type="radio" name="operacion" id="division" value="division">
 
+    <label>Selecciona la operación:</label>
 
+    <div>
+        <input type="radio" name="operacion" id="suma" value="suma">
+        <label for="suma">Suma</label>
+    </div>
+
+    <div>
+        <input type="radio" name="operacion" id="resta" value="resta">
+        <label for="resta">Resta</label>
+    </div>
+
+    <div>
+        <input type="radio" name="operacion" id="multiplicacion" value="multiplicacion">
+        <label for="multiplicacion">Multiplicación</label>
+    </div>
+
+    <div>
+        <input type="radio" name="operacion" id="division" value="division">
+        <label for="division">División</label>
+    </div>
 
 
     <button type="submit" class="btn btn-primary">Calcular</button>
+
+    <h1>
+        La suma de {{n1}} + {{n2}} = {{"%.2f" |format(res)}}
+    </h1>
 </form>
 
 {% endblock %}
