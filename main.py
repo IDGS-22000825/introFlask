@@ -1,13 +1,44 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template, request
+from flask import flash
+from flask_wtf.csrf import CSRFProtect
 import math
 
+import forms
+
 app = Flask(__name__)
+
+# Seguridad y Clave secreta
+app.secret_key = 'Clave secreta'
+csrf = CSRFProtect()
 
 @app.route('/')
 def index():
     titulo="IDGS802"
     lista=['juan','karla', 'Miguel', 'Ana']
     return render_template('index.html', titulo=titulo,lista=lista)
+
+@app.route('/usuarios', methods = ['GET', 'POST'])
+def usuarios():
+    mat = 0
+    nom = ''
+    apa = ''
+    ama = ''
+    email = ''
+
+    usuarios_class=forms.UserForm(request.form)
+    
+    if request.method == 'POST' and usuarios_class.validate():
+        # De esta forma obtenemos los datos desde el html
+        mat = usuarios_class.matricula.data
+        nom = usuarios_class.nombre.data
+        apa = usuarios_class.apaterno.data
+        ama = usuarios_class.amaterno.data
+        email = usuarios_class.correo.data
+        
+        mensaje = 'Bienvenido'.format(nom)
+        flash(mensaje)
+
+    return render_template('usuarios.html', form=usuarios_class, mat=mat, nom=nom, apa=apa, ama=ama, email=email)
 
 @app.route('/formulario')
 def formulario():
@@ -101,7 +132,7 @@ def distancia():
 
 
 
-# Lógica para realizar la consulta del Cinépolis
+# Cinepolis
 class Personas:
     def __init__(self):
         self.historial = []
@@ -168,4 +199,7 @@ def cinepolis():
     )
 
 if __name__ == '__main__':
+    csrf.init_app(app)
     app.run(debug=True)
+
+#pip freezer > requiremet.txt

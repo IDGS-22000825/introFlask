@@ -40,6 +40,16 @@
     </nav>
 
     <div class="container mt-5 pt-4">
+{% with messages=get_flashed_messages()%}
+
+    {%if messeages%}
+        {%for messages in messages%}
+        <div class="alert alert-sicces">
+            {{messages}}
+        </div>
+        {%endfor%}
+    {%endif%}
+{%endwith%}
 
         {% block content %}
         {% endblock%}
