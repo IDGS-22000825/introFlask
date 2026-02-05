@@ -6,19 +6,20 @@
 
 <form action="/distancia" method="post">
 
-    {{macros.datos("d1", "Ingrese la primera distancia X", "number")}}
-    {{macros.datos("d2", "Ingrese la primera distancia Y", "number")}}
-    {{macros.datos("d3", "Ingrese la segunda distancia X", "number")}}
-    {{macros.datos("d4", "Ingrese la segundqa distancia Y", "number")}}
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-
+    {{macros.datos("D1", "Ingrese la primera distancia X", "number")}}
+    {{macros.datos("D2", "Ingrese la primera distancia Y", "number")}}
+    {{macros.datos("D3", "Ingrese la segunda distancia X", "number")}}
+    {{macros.datos("D4", "Ingrese la segundqa distancia Y", "number")}}
 
     <button type="submit" class="btn btn-primary">Calcular</button>
 
     <h1>
-        La distancia de ({{d1}},{{d2}}) y ({{d3}},{{d4}})  = {{"%.2f" |format(res)}}
+        La distancia de ({{d1}},{{d2}}) y ({{d3}},{{d4}}) = {{"%.2f" |format(res)}}
     </h1>
 
 </form>
+
 
 {% endblock %}

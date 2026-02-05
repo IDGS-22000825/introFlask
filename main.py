@@ -34,7 +34,7 @@ def usuarios():
         apa = usuarios_class.apaterno.data
         ama = usuarios_class.amaterno.data
         email = usuarios_class.correo.data
-        
+
         mensaje = 'Bienvenido'.format(nom)
         flash(mensaje)
 
@@ -114,10 +114,10 @@ def alumnos():
 @app.route("/distancia", methods=["GET", "POST"])
 def distancia():
 
-    d1 = float(request.form.get("d1"))
-    d2 = float(request.form.get("d2"))
-    d3 = float(request.form.get("d3"))
-    d4 = float(request.form.get("d4"))
+    d1 = float(request.form.get("d1", 0))
+    d2 = float(request.form.get("d2", 0))
+    d3 = float(request.form.get("d3", 0))
+    d4 = float(request.form.get("d4", 0))
     res = 0
     r1 = 0
     r2 = 0
@@ -164,39 +164,33 @@ def cinepolis():
     cantidad_boletos = 0
     total = 0
 
-    if request.method == "POST":
-        nombre = request.form.get('nombre', "").strip()
+    Cine_class = forms.CineForm(request.form)
+
+    if request.method == "POST" and Cine_class.validate():
+
+        nombre = Cine_class.nombre.data.strip()
         tarjeta = request.form.get('tarjeta', "no")
 
-        try:
-            cantidad_compradores = int(request.form.get('cantidad_compradores', 0))
-            cantidad_boletos = int(request.form.get('cantidad_boletos', 0))
-        except ValueError:
-            mensaje = "Por favor, ingrese valores numéricos válidos."
-            return render_template('cinepolis.html', mensaje=mensaje)
+        cantidad_compradores = Cine_class.compradores.data
+        cantidad_boletos = Cine_class.cant_boletos.data
 
-        if cantidad_compradores <= 0:
-            mensaje = "Debe haber al menos un comprador."
-        elif cantidad_boletos <= 0:
-            mensaje = "Debe comprar al menos un boleto."
-        else:
-            max_boletos = cantidad_compradores * 7
-            if cantidad_boletos > max_boletos:
-                mensaje = f"Has excedido el número máximo de boletos permitidos ({max_boletos})."
-            else:
-                total = personas.calcularTotal(cantidad_boletos, tarjeta)
-                personas.historial.append((nombre, total))
+        total = personas.calcularTotal(cantidad_boletos, tarjeta)
+        personas.historial.append((nombre, total))
+
+        mensaje = "Compra realizada correctamente"
 
     return render_template(
         'cinepolis.html',
         mensaje=mensaje,
         nombre=nombre,
-        tipo='error',
+        tipo='success' if mensaje else 'error',
         cantidad_compradores=cantidad_compradores,
         tarjeta=tarjeta,
         cantidad_boletos=cantidad_boletos,
-        total=total
+        total=total,
+        form=Cine_class
     )
+
 
 if __name__ == '__main__':
     csrf.init_app(app)

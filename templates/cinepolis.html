@@ -1,58 +1,59 @@
 {% block container %}
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CINEPOLIS - NICE</title>
-    <link rel="stylesheet" href="../static/css/cinepolis.css">
-</head>
+<link rel="stylesheet" href="../static/css/cinepolis.css">
 
 <body>
-    <div class="container">
-        <h1>CINÉPOLIS - NICE</h1>
+
+    <div class="main">
+
+        <div class="header">
+            <span class="brand">Cinepolis</span>
+        </div>
 
         {% if mensaje %}
         <p class="mensaje-error">{{ mensaje }}</p>
         {% endif %}
 
-        <form action="cinepolis" method="POST">
+        {% import "_macros.html" as macros %}
+        <form action="cinepolis" method="POST" novalidate class="form-cinepolis">
 
-            <h3>Entradas</h3>
+            {{ form.csrf_token }}
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-            <label>Nombre</label>
-            <input type="text" name="nombre" value="{{ nombre|default('') }}" required>
 
-            <label>Cantidad Compradores</label>
-            <input type="number" name="cantidad_compradores" value="{{ cantidad_compradores|default(0) }}" min="1" required>
+            <div class="panel">
+                <h2>Boletos</h2>
 
-            <label>Tarjeta Cineco</label>
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="tarjeta" value="si" {% if tarjeta=='si' %}checked{% endif %}> Sí
-                </label>
-                <label>
-                    <input type="radio" name="tarjeta" value="no" {% if tarjeta=='no' %}checked{% endif %}> No
-                </label>
+                {{ macros.campoNuevo(form.nombre, class="form-control") }}
+                {{ macros.campoNuevo(form.compradores, class="form-control") }}
+
+                <label>Tarjeta Cineco</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="tarjeta" value="si" {% if tarjeta=='si' %}checked{% endif %}> Sí
+                    </label>
+                    <label>
+                        <input type="radio" name="tarjeta" value="no" {% if tarjeta=='no' %}checked{% endif %}> No
+                    </label>
+                </div>
+
+                {{ macros.campoNuevo(form.cant_boletos, class="form-control") }}
             </div>
 
-            <label>Cantidad de Boletos</label>
-            <input type="number" name="cantidad_boletos" value="{{ cantidad_boletos|default(0) }}" min="1" required>
+            <div class="panel" style="grid-column: 3">
+                <h2>Salidas</h2>
 
-            <h3>Salidas</h3>
+                <label>Total a pagar</label>
+                <input type="text" name="valor_pagar" value="{{ total|default('') }}" readonly>
+            </div>
 
-            <label>Total a pagar</label>
-            <input type="text" name="valor_pagar" value="{{ total|default('') }}" readonly>
-
-            <div class="button-group">
+            <!-- Acciones -->
+            <div class="acciones">
                 <button type="submit">Procesar</button>
                 <button type="button" onclick="window.location.href='/'">Salir</button>
             </div>
 
         </form>
     </div>
-</body>
 
-</html>
+</body>
 {% endblock %}

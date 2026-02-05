@@ -1,145 +1,100 @@
+body {
+    background-image: url("../img/logo2");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
 
-        * {
-            box-sizing: border-box;
-        }
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+}
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at top, #1a2a6c, #000814);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-        }
 
-        .container {
-            width: 100%;
-            max-width: 520px;
-            padding: 35px 40px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            backdrop-filter: blur(18px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        }
 
-        h1 {
-            text-align: center;
-            font-size: 2.6rem;
-            margin-bottom: 5px;
-            color: #FFD700;
-            letter-spacing: 2px;
-        }
 
-        h3 {
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #ffd966;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 6px;
-        }
+.main {
+    width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #cfd8dc;
+}
 
-        label {
-            display: block;
-            margin-top: 14px;
-            font-size: 0.95rem;
-            color: #e0e0e0;
-        }
+.header {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
-        input[type="text"],
-        input[type="number"] {
-            width: 100%;
-            margin-top: 6px;
-            padding: 10px 12px;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
+.brand {
+    background: white;
+    color: #0b3c7c;
+    padding: 5px 15px;
+}
 
-        input::placeholder {
-            color: #ccc;
-        }
+.form-cinepolis {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    align-items: start;
+}
 
-        input:focus {
-            outline: none;
-            border-color: #FFD700;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-        }
+.panel {
+    border: 1px solid white;
+    padding: 15px;
+}
 
-        input[readonly] {
-            background: rgba(255, 255, 255, 0.25);
-            font-weight: bold;
-            color: #000;
-        }
+.panel h2 {
+    margin-top: 0;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
 
-        .radio-group {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 12px;
-        }
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+}
 
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
 
-        input[type="radio"] {
-            accent-color: #FFD700;
-            transform: scale(1.2);
-        }
+.radio-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+}
 
-        .mensaje-error {
-            margin-top: 10px;
-            color: #ff6b6b;
-            font-weight: bold;
-            text-align: center;
-        }
+.logo-central {
+    text-align: center;
+}
 
-        .button-group {
-            margin-top: 30px;
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
+.logo-central img {
+    width: 200px;
+    margin-top: 30px;
+}
 
-        button {
-            padding: 12px 22px;
-            border-radius: 10px;
-            border: none;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+.logo-central p {
+    font-size: 14px;
+    letter-spacing: 2px;
+}
 
-        button[type="submit"] {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #000;
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
-        }
+.acciones {
+    grid-column: 1 / 4;
+    text-align: center;
+    margin-top: 20px;
+}
 
-        button[type="submit"]:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.7);
-        }
-
-        button[type="button"] {
-            background: transparent;
-            border: 1px solid #FFD700;
-            color: #FFD700;
-        }
-
-        button[type="button"]:hover {
-            background: rgba(255, 215, 0, 0.15);
-        }
+.acciones button {
+    padding: 8px 25px;
+    margin: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
